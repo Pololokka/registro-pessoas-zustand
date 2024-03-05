@@ -3,6 +3,7 @@ const Input = ({
   name,
   type,
   htmlName,
+  id,
   required,
   value,
 }: {
@@ -10,6 +11,7 @@ const Input = ({
   name: string;
   type: any;
   htmlName: string;
+  id?: string;
   required: boolean;
   value: any;
 }) => {
@@ -19,6 +21,7 @@ const Input = ({
       <input
         type={type}
         name={htmlName}
+        id={id || htmlName}
         required={required}
         onChange={handleChange}
         value={value || ''}

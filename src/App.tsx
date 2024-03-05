@@ -6,13 +6,13 @@ import Input from './Components/Input/Index';
 const formDefaultValues = {
   name: '',
   age: '',
-  gender: '',
+  gender: 'masc',
   email: '',
   cpf: '',
   genreFirst: '',
   genreSecond: '',
   genreThird: '',
-  preference: '',
+  preference: 'shorts',
 };
 
 function App() {
@@ -50,6 +50,15 @@ function App() {
             required={true}
             value={formValues.age}
           />
+
+          <label htmlFor="gender">Sexo</label>
+          <select name="gender" id="gender" required onChange={handleChange}>
+            <option value=""></option>
+            <option value="masc">Masculino</option>
+            <option value="fem">Feminino</option>
+            <option value="other">Outro</option>
+            <option value="na">Prefiro não comentar</option>
+          </select>
 
           <Input
             handleChange={handleChange}
@@ -95,6 +104,20 @@ function App() {
             required={true}
             value={formValues.genreThird}
           />
+
+          <label htmlFor="preference">Preferência</label>
+          <select
+            name="preference"
+            id="preference"
+            required
+            onChange={handleChange}
+          >
+            <option value=""></option>
+            <option value="shorts">Curtas</option>
+            <option value="feature">Longas</option>
+            <option value="miniseries">Mini-séries</option>
+            <option value="shows">Séries</option>
+          </select>
 
           <input type="submit" value="Enviar!" />
         </form>
