@@ -17,8 +17,11 @@ const Input = ({
 }) => {
   return (
     <>
-      <label htmlFor={htmlName}>{name}: </label>
+      <label className="text" htmlFor={htmlName}>
+        {name}:{' '}
+      </label>
       <input
+        className="text__input"
         type={type}
         name={htmlName}
         id={id || htmlName}
