@@ -35,8 +35,12 @@ html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1em 0;
+  padding: 0.25em 0;
   gap: 1em;
+}
+
+.hide {
+  display: none;
 }
 
 .text {
@@ -54,10 +58,17 @@ html {
 input,
 select {
   padding: 0.25em;
+  border-radius: 5px;
 }
 
 .button {
   background-color: var(--cor-botao);
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 0.5em;
+  cursor: pointer;
+  transition: 100ms;
+}
+
+.button:active {
+  transform: scale(0.75);
 }

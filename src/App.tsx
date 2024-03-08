@@ -17,10 +17,13 @@ const formDefaultValues = {
 
 function App() {
   const [formValues, setFormValues] = useState(formDefaultValues);
+  const [show, setShow] = useState(true);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
     console.log(formValues);
+    setFormValues(formDefaultValues);
+    handleShow();
   };
 
   const handleChange = (event: any) => {
@@ -29,10 +32,25 @@ function App() {
     setFormValues({ ...formValues, [field]: value });
   };
 
+  const handleShow = () => {
+    setShow(!show);
+  };
+
   return (
     <>
       <main>
-        <form className="form__container" onSubmit={handleSubmit}>
+        <form
+          className={show ? 'hide' : 'form__container'}
+          onSubmit={handleShow}
+        >
+          <h1 className="text">Obrigado por participar!</h1>
+          <input className="text button" type="submit" value="Refazer!" />
+        </form>
+
+        <form
+          className={show ? 'form__container' : 'hide'}
+          onSubmit={handleSubmit}
+        >
           <div className="form__container">
             <Input
               handleChange={handleChange}

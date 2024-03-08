@@ -17,7 +17,7 @@ const Input = ({
 }) => {
   return (
     <>
-      <label className="text" htmlFor={htmlName}>
+      <label className="text input__comp" htmlFor={htmlName}>
         {name}:{' '}
       </label>
       <input
