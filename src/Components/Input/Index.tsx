@@ -1,20 +1,21 @@
+import { useAnswerStore } from '../../Store/AnswersStore';
+
 const Input = ({
-  handleChange,
   name,
   type,
   htmlName,
   id,
   required,
-  value,
 }: {
-  handleChange: (event: any) => void;
   name: string;
   type: any;
   htmlName: string;
   id?: string;
   required: boolean;
-  value: any;
 }) => {
+  const changeAnswer = useAnswerStore((state) => state.changeAnswer);
+  const answers = useAnswerStore((state) => state.answers);
+
   return (
     <>
       <label className="text input__comp" htmlFor={htmlName}>
@@ -26,8 +27,11 @@ const Input = ({
         name={htmlName}
         id={id || htmlName}
         required={required}
-        onChange={handleChange}
-        value={value || ''}
+        onChange={(event) =>
+          changeAnswer(event.target.name, event.target.value)
+        }
+        //@ts-ignore
+        value={answers[htmlName] || ''}
       />
     </>
   );

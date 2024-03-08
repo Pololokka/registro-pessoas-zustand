@@ -2,34 +2,17 @@ import { useState } from 'react';
 import './App.css';
 
 import Input from './Components/Input/Index';
-
-const formDefaultValues = {
-  name: '',
-  age: '',
-  gender: 'masc',
-  email: '',
-  cpf: '',
-  genreFirst: '',
-  genreSecond: '',
-  genreThird: '',
-  preference: 'shorts',
-};
+import { useAnswerStore } from './Store/AnswersStore';
 
 function App() {
-  const [formValues, setFormValues] = useState(formDefaultValues);
   const [show, setShow] = useState(true);
+  const answers = useAnswerStore((state) => state.answers);
+  const changeAnswer = useAnswerStore((state) => state.changeAnswer);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    console.log(formValues);
-    setFormValues(formDefaultValues);
+    console.log(answers);
     handleShow();
-  };
-
-  const handleChange = (event: any) => {
-    const value = event.target.value;
-    const field = event.target.name;
-    setFormValues({ ...formValues, [field]: value });
   };
 
   const handleShow = () => {
@@ -52,23 +35,9 @@ function App() {
           onSubmit={handleSubmit}
         >
           <div className="form__container">
-            <Input
-              handleChange={handleChange}
-              name="Nome"
-              type="text"
-              htmlName="name"
-              required={false}
-              value={formValues.name}
-            />
+            <Input name="Nome" type="text" htmlName="name" required={false} />
 
-            <Input
-              handleChange={handleChange}
-              name="Idade"
-              type="number"
-              htmlName="age"
-              required={true}
-              value={formValues.age}
-            />
+            <Input name="Idade" type="number" htmlName="age" required={true} />
 
             <label className="text" htmlFor="gender">
               Sexo
@@ -78,7 +47,9 @@ function App() {
               name="gender"
               id="gender"
               required
-              onChange={handleChange}
+              onChange={(event) =>
+                changeAnswer(event.target.name, event.target.value)
+              }
             >
               <option value=""></option>
               <option value="masc">Masculino</option>
@@ -87,49 +58,29 @@ function App() {
               <option value="na">Prefiro não comentar</option>
             </select>
 
-            <Input
-              handleChange={handleChange}
-              name="Email"
-              type="email"
-              htmlName="email"
-              required={true}
-              value={formValues.email}
-            />
+            <Input name="Email" type="email" htmlName="email" required={true} />
+
+            <Input name="CPF" type="number" htmlName="cpf" required={false} />
 
             <Input
-              handleChange={handleChange}
-              name="CPF"
-              type="number"
-              htmlName="cpf"
-              required={false}
-              value={formValues.cpf}
-            />
-
-            <Input
-              handleChange={handleChange}
               name="Gênero Favorito de Filme"
               type="text"
               htmlName="genreFirst"
               required={true}
-              value={formValues.genreFirst}
             />
 
             <Input
-              handleChange={handleChange}
               name="Segundo Gênero Favorito de Filme"
               type="text"
               htmlName="genreSecond"
               required={true}
-              value={formValues.genreSecond}
             />
 
             <Input
-              handleChange={handleChange}
               name="Terceiro Gênero Favorito de Filme"
               type="text"
               htmlName="genreThird"
               required={true}
-              value={formValues.genreThird}
             />
 
             <label className="text" htmlFor="preference">
@@ -140,7 +91,9 @@ function App() {
               name="preference"
               id="preference"
               required
-              onChange={handleChange}
+              onChange={(event) =>
+                changeAnswer(event.target.name, event.target.value)
+              }
             >
               <option value=""></option>
               <option value="shorts">Curtas</option>
